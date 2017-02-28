@@ -27,15 +27,15 @@
     var p = document.getElementsByClassName('parent')[0];
     var s = document.getElementsByClassName('son')[0];
     
-    p.addEventListener('click', () => {
+    p.addEventListener('click', function() {
       console.log('click')
     });
     
-    p.addEventListener('touchstart', () => {
+    p.addEventListener('touchstart', function() {
       console.log('touchstart');
     });
 
-    p.addEventListener('touchend', () => {
+    p.addEventListener('touchend', function() {
       console.log('touchend');
     });
   </script>
