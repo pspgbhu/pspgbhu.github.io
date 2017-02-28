@@ -28,14 +28,17 @@
     var s = document.getElementsByClassName('son')[0];
     
     p.addEventListener('click', function() {
+      s.innerHTML += '1';
       console.log('click')
     });
     
     p.addEventListener('touchstart', function() {
+      s.innerHTML += '2';
       console.log('touchstart');
     });
 
     p.addEventListener('touchend', function() {
+      s.innerHTML += '3';
       console.log('touchend');
     });
   </script>
