@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>rem</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script>
+    (function () {
+      var baseFontSize = 100;
+      var baseWidth = 375;
+      var html = document.querySelector('html');
+
+      /**
+       * 如果用户将系统字号改为了 “大”，浏览器就会放大 font-size 的字号，因此会影响 rem 布局。
+       * 下面这个函数会计算出字体的放大比率。
+       */
+      var webviewTextZoomFactor = function () {
+        var $dom = document.createElement('div');
+        $dom.style = 'font-size:100px;';
+        html.appendChild($dom);
+
+        // 计算出放大后的字体
+        var scaledFontSize = parseInt(
+          window.getComputedStyle($dom, null).getPropertyValue('font-size')
+        );
+        html.removeChild($dom);
+
+        // 计算原字体和放大后字体的比例
+        return 100 / scaledFontSize;
+      }
+
+      var set = function () {
+        var clientWidth = document.documentElement.clientWidth || window.innerWidth;
+
+        var rem = 100;
+        if (clientWidth != baseWidth) {
+          rem = Math.floor(clientWidth / baseWidth * baseFontSize);
+        }
+        // 根据系统缩放比率来优化 rem 的大小
+        var rem = rem * webviewTextZoomFactor();
+
+        html.style.fontSize = rem + 'px';
+      }
+      set();
+
+      window.addEventListener('resize', set);
+    }());
+  </script>
+</head>
+
+<body>
+  <div style="
+    width: 3.75rem;
+    background: blue;
+    overflow: hidden;
+  ">
+    12312312312312312312312312312313123123131231231231231231312312231231231231312313123
+  </div>
+</body>
+
+</html>
